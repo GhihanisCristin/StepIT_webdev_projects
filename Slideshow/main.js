@@ -36,8 +36,9 @@ function showImage(image){
 //This function creates the dots below the picture
 function createBiluta(param){
     bilute.innerHTML = ''; //reset the menu element
-    for (var i=0; i<images.length; i++){
+    /*for (let i=0; i<images.length; i++){*/ //quick fix: let in loc de var
         //creating dots (bilute)
+        for (var i=0; i<images.length; i++){
         var biluta = document.createElement('span');
         biluta.className = 'biluta';
         biluta.title = images[i].alt;
@@ -46,14 +47,22 @@ function createBiluta(param){
         if (i === param)
             biluta.classList.add('activ');
         //adding click events for dots
-        biluta.addEventListener('click', () => {
+        /*biluta.addEventListener('click', () => {
             console.log(i,index);
             createBiluta(i);
             showImage(i);
             console.log("He clicked biluta number:"+i);
-        });        
+        }); */ //este varianta cu let, fara factory
+        biluta.addEventListener('click', bilutaClick(i));
     }
     index = param;
+}
+
+function bilutaClick (index){
+    return () => {
+        createBiluta(index);
+        showImage(index);
+    }
 }
 
 window.addEventListener("load", ()=> {
