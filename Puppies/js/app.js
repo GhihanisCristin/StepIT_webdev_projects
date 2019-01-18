@@ -75,12 +75,18 @@ card.addEventListener("click", () =>{
 });
 // PAS 6: Creati o functie fetchData(url) care sa automatizeze primii doi pasi dintr-un request 
 // (trimiterea request-ului si parsarea raspunsului JSON)
-
+var array = [];
+function fetchData(url){
+    return fetch(url)
+    .then(res => res.json())
+}
+//fetchData("https://dog.ceo/api/breeds/list").then (data => console.log(data.message));
 
 // PAS 7 - atasati cu metoda .catch() un handler care sa afiseze in consola un mesaj custom de eroare 
 // si eroarea primita de la server. Ca sa va asigurati ca functioneaza, schimbati url-ul catre care
 // trimiteti request-ul cu unul gresit.
-
+fetchData("https://dog.ceo/api/breeds/listt")
+    .catch (data => console.log(data.message))
 
 // PAS 8 - integrati primele doua comenzi .fetch() intr-o singura comanda Promise.all()
 
