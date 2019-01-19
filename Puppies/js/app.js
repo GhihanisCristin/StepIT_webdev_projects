@@ -12,7 +12,7 @@
 const select = document.getElementById('breeds');
 const card = document.querySelector('.card'); 
 const form = document.querySelector('form');
-
+const submit = document.getElementById("submit");
 
 // ------------------------------------------
 //  FETCH FUNCTIONS
@@ -86,11 +86,13 @@ function fetchData(url){
 // si eroarea primita de la server. Ca sa va asigurati ca functioneaza, schimbati url-ul catre care
 // trimiteti request-ul cu unul gresit.
 fetchData("https://dog.ceo/api/breeds/listt")
-    .catch (data => console.log(data.message))
+    .catch(error => console.log(error));
 
 // PAS 8 - integrati primele doua comenzi .fetch() intr-o singura comanda Promise.all()
-
-
+Promise.all([fetchData("https://dog.ceo/api/breeds/image/random"),fetchData("https://dog.ceo/api/breeds/list")])
+    .then(function(values) {
+    console.log(values);
+  });
 
 // ------------------------------------------
 //  POST DATA
@@ -99,7 +101,18 @@ fetchData("https://dog.ceo/api/breeds/listt")
 
 // PAS 9 - Transmiteti datele completate in formular printr-un request POST, catre https://jsonplaceholder.typicode.com/posts 
 // Printati in consola raspunsul primit de la server, impreuna cu un mesaj custom.  
-
+submit.addEventListener("click", event => {
+    event.preventDefault();
+    var name = document.getElementById("name");
+    var comment = document.getElementById("comment");
+    //console.log(name.value,comment.value);
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "post",
+        body: name.value & comment.value
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+});
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
