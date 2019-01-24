@@ -6,4 +6,5 @@ Trainer: @Dragos Dehelean
 
 * [Slideshow](https://ghihaniscristin.github.io/StepIT_webdev_projects/Slideshow/) 
 * [Shopping](https://ghihaniscristin.github.io/StepIT_webdev_projects/Shopping/) 
-* [Puppies](https://ghihaniscristin.github.io/StepIT_webdev_projects/Puppies/) 
+* [Puppies](https://ghihaniscristin.github.io/StepIT_webdev_projects/Puppies/)
+* [Kittens](https://ghihaniscristin.github.io/StepIT_webdev_projects/Kittens/)  
