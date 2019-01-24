@@ -106,7 +106,6 @@ selectContainer.addEventListener("change", (event) => {
                 fetch("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id, {
                     method: "GET",
                     mode: "cors",
-                    breed_id: elem.id,
                     headers: {
                     "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
                     }
