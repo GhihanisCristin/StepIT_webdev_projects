@@ -58,7 +58,7 @@ main {
       border-radius: 4px;
       margin-bottom: 2.25rem;
       cursor: pointer; }
-      @media (max-width: 720px) {
+      @media (max-width: 360px) {
         .kitten img {
           width: 100%; } }
     .kitten p {

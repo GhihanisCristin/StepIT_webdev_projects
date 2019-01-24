@@ -4,12 +4,24 @@ var sideBreedData = document.getElementById("breedInfo");
 
 //Getting a random cat image and populating options for Select with breeds names
 function getBreeds(){
-    return fetch("https://api.thecatapi.com/v1/breeds")
+    return fetch("https://api.thecatapi.com/v1/breeds", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+        "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+        }
+    })
         .then(res => res.json())
 }
 
 function getPic(){
-    return fetch("https://api.thecatapi.com/v1/images/search")
+    return fetch("https://api.thecatapi.com/v1/images/search", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+        "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+        }
+    })
     .then(res => res.json())
 }
 
@@ -91,11 +103,13 @@ selectContainer.addEventListener("change", (event) => {
             if (elem.name === event.target.value){
                 putBreedinfo(elem);
                 //console.log("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id);
-                fetch("https://api.thecatapi.com/v1/images/search", {
-                    Name: "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
-                    Location: "header",
+                fetch("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id, {
+                    method: "GET",
+                    mode: "cors",
                     breed_id: elem.id,
-                    attach_breed: 1
+                    headers: {
+                    "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+                    }
                 })
                     .then(res => res.json())
                     .then(data => displayPic(data))                             
@@ -109,13 +123,13 @@ imageContainer.addEventListener("click", () =>{
     getBreeds().then(data => {
         data.forEach(elem =>{
             if (elem.name === selectContainer.value){
-                putBreedinfo(elem);
                 //console.log("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id);
-                fetch("https://api.thecatapi.com/v1/images/search", {
-                    Name: "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
-                    Location: "header",
-                    breed_id: elem.id,
-                    attach_breed: 1
+                fetch("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id, {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                    "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+                    }
                 })
                     .then(res => res.json())
                     .then(data => displayPic(data))                             
