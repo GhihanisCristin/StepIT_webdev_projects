@@ -66,6 +66,7 @@ function populateSelection(array){
     array.forEach(element => {
         var selectOption = document.createElement("option");
         selectOption.textContent = element.name;
+        selectOption.value = element.id;
         selectContainer.appendChild(selectOption);
     });
 };
@@ -98,7 +99,7 @@ function drawStars(value){
     for(var i=0;i<value;i++)
         string += "*";
     return string;
-}
+};
 function putBreedinfo(object){
     //sideBreedData.innerHTML='';
     while (sideBreedData.childNodes.length > 2) {
@@ -196,3 +197,31 @@ selectCategoryContainer.addEventListener("change", (event) => {
 // Cum se poate optimiza foarte bine: in option (child al select) pot stoca si element.id in atributul value
 // Adica, option se poate construi in felul urmator: <option value = "element_id">element_name</option>
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+
+//add a search input that scand a breed oject for all matches.
+//for search input, start scanning after at least 3 key inputs. Add an event listener for text input
+//populate all images that matches the search criteria
+
+var searchBreed = document.getElementById("searchText");
+var breedObject = getBreeds().then(data => breedObject = data);
+var defaultUrl = "https://api.thecatapi.com/v1/images/search?breed_id=";
+var urlArray = [];
+//HTML extended for an input text field used to search breeds + another div to put the pictures in
+//CSS also extended for the div above
+//Adding the event to monitor the search values
+searchBreed.addEventListener("keyup", () => {
+    //console.log("Do we have the correct value?" + searchBreed.value);
+    if (searchBreed.value.length >= 3)
+        dynamicSearch(searchBreed.value);
+        //console.log(breedObject);
+        //console.log("I'm triggered if there are at least 3 characters");
+});
+//dynamic search is called when we have a string to match and if we do, we'll create a url array
+//We'll use the url arrat to call fetches and generate images
+function dynamicSearch(text){
+    breedObject.forEach((elem) => {
+        //console.log(elem.name);
+        if (elem.name.includes(text))
+            console.log(elem.id);
+    })
+};
