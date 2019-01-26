@@ -63,6 +63,16 @@ main {
       cursor: pointer;
 }
 
+.kittenCategory {
+    text-align: center;
+    border-radius: 6px;
+    background-color: #fff;
+    border: solid 2px #f0dce5;
+    padding: 20px;
+    margin-bottom: 2px;
+    max-height: 100px;
+}
+
 .kittenCategory img {
     border-radius: 4px;
     margin-bottom: 2.25rem;
@@ -70,6 +80,7 @@ main {
     max-height: 100%;
     cursor: pointer;
 }
+
   
 footer {
     margin-top: 10px;
