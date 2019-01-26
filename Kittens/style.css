@@ -59,7 +59,7 @@ main {
 .kitten img {
       border-radius: 4px;
       margin-bottom: 2.25rem;
-      max-width: 360px;
+      max-width: 100%;
       cursor: pointer;
 }
   
