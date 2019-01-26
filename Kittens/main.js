@@ -222,6 +222,7 @@ function dynamicSearch(text){
     breedObject.forEach((elem) => {
         //console.log(elem.name);
         if (elem.name.includes(text))
-            console.log(elem.id);
+            urlArray = urlArray + elem.id;
+            console.log(elem.id + " " + urlArray);
     })
 };
