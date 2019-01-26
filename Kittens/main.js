@@ -136,3 +136,4 @@ imageContainer.addEventListener("click", () =>{
         });
     });
 });
+// fetch by category & limit 5: https://api.thecatapi.com/v1/images/search?limit=5&category_ids=1
