@@ -1,6 +1,8 @@
 var selectContainer = document.getElementById("breedSelect");
 var imageContainer = document.getElementById("kittenPic");
 var sideBreedData = document.getElementById("breedInfo");
+var selectCategoryContainer = document.getElementById("categorySelect");
+var imageCategoryContainer = document.getElementById("kittenPicbyCategory");
 
 //Getting a random cat image and populating options for Select with breeds names
 function getBreeds(){
@@ -12,7 +14,18 @@ function getBreeds(){
         }
     })
         .then(res => res.json())
-}
+};
+
+function getCategories(){
+    return fetch("https://api.thecatapi.com/v1/categories", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+        "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+        }
+    })
+        .then(res => res.json())
+};
 
 function getPic(){
     return fetch("https://api.thecatapi.com/v1/images/search", {
@@ -23,7 +36,12 @@ function getPic(){
         }
     })
     .then(res => res.json())
-}
+};
+
+getCategories().then(data => {
+    //console.log(data);
+    populateCategorySelection(data);
+});
 
 getBreeds().then(data => {
     //console.log(data[0].name, data[0].adaptability, data.length);
@@ -49,6 +67,14 @@ function populateSelection(array){
         var selectOption = document.createElement("option");
         selectOption.textContent = element.name;
         selectContainer.appendChild(selectOption);
+    });
+};
+
+function populateCategorySelection(array){
+    array.forEach(element => {
+        var selectOption = document.createElement("option");
+        selectOption.textContent = element.name;
+        selectCategoryContainer.appendChild(selectOption);
     });
 };
 //Clicking on a pic will randomly get another pic for that breed. We will also update the breed info side
@@ -137,3 +163,33 @@ imageContainer.addEventListener("click", () =>{
     });
 });
 // fetch by category & limit 5: https://api.thecatapi.com/v1/images/search?limit=5&category_ids=1
+function putCategoriesPictures(object){
+    //console.log(object);
+    object.forEach((elem) =>{
+        var imageCategory = document.createElement("img");
+        imageCategory.src = elem.url;
+        imageCategoryContainer.appendChild(imageCategory);
+    })
+};
+
+selectCategoryContainer.addEventListener("change", (event) => {
+    while (imageCategoryContainer.childNodes.length > 0) {
+        imageCategoryContainer.removeChild(imageCategoryContainer.lastChild);
+    }
+    getCategories().then(data => {
+        data.forEach(elem =>{
+            if (elem.name === event.target.value){
+                //console.log("https://api.thecatapi.com/v1/images/search?breed_id="+elem.id);
+                fetch("https://api.thecatapi.com/v1/images/search?limit=5&category_ids="+elem.id, {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                    "x-api-key": "8b7a9ba3-b98b-4c7d-90b8-080251ad7512",
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => putCategoriesPictures(data))                             
+            }
+        });
+    });
+});
