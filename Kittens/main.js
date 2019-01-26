@@ -193,3 +193,5 @@ selectCategoryContainer.addEventListener("change", (event) => {
         });
     });
 });
+// Cum se poate optimiza foarte bine: in option (child al select) pot stoca si element.id in atributul value
+// Adica, option se poate construi in felul urmator: <option value = "element_id">element_name</option>
